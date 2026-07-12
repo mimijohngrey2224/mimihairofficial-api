@@ -8,7 +8,11 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     name: { type: String, required: true },
-    img: { type: String, required: true },
+    // img: { type: String, required: true },
+      img: {
+      type: String,
+     default: null,
+      },
     video: { type: String },
     price: { type: Number, required: true },
 
