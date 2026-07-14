@@ -7,5 +7,3 @@ router.post("/", categoryController.createCategory)
 
 module.exports = router;
 
-
-

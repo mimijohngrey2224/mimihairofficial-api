@@ -22,7 +22,7 @@ exports.initiatepayment = async(req, res)=>{
             amount, 
             currency,
             // redirect_url: "http://localhost:5173/thankyou",
-            redirect_url: `http://localhost:5173/thankyou?tx_ref=${orderId}`,
+            redirect_url: `https://mimihairofficial-frontend.vercel.app/thankyou?tx_ref=${orderId}`,
             customer: {
             email: user.email,
             name: `${user.firstName} ${user.lastName}`
@@ -58,48 +58,6 @@ exports.initiatepayment = async(req, res)=>{
     }
 };
 
-// exports.verifyPayment = async (req, res) =>{
-//     const { transaction_id, orderId } = req.body;
-//     const user = req.user.id;
-
-//     try {
-//         const response = await fetch(
-//             `https://api.flutterwave.com/v3/transactions/${transaction_id}/verify`,
-//             {
-//                 method: "GET",
-//                 headers: {
-//                     Authorization: `Bearer ${FLW_SECRET_KEY}`, 
-//                 },
-//             }
-//         );
-
-//         const data = await response.json();
-//         if (data.status === "success") {
-//             const cart = await Cart.findOne({ user: req.user.id }).populate(
-//                 "products.product"
-//             );
-
-//             const order = new Order({
-//                 lastName: data.data.meta.lastName,
-//                 phone: data.data.meta.phone,
-//                 address: data.data.meta.address,
-//                 products: cart.products,
-//                 amount: data.data.amount,
-//                 status: "completed",
-//                 transactionId: transaction_id,
-//             });
-
-//             await order.save();
-//             await Cart.findOneAndDelete({ user: req.user.id });
-
-//             res.json({ msg: "Payment Successful", order });
-//         }else {
-//             res.json({ msg: "Payment verification failed" });
-//         }
-//     } catch (error) {
-//         console.error(error.message);
-//     }
-// };
 
 
 
@@ -120,11 +78,6 @@ exports.verifyPayment = async (req, res) => {
     );
 
     const data = await response.json();
-
-    // if (data.status === "success") {
-    //   const cart = await Cart.findOne({ user: req.user.id }).populate(
-    //     "products.product"
-    //   );
 
             if (
         data.status === "success" &&
